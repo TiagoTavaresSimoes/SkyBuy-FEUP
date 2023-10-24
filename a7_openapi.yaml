@@ -85,4 +85,67 @@ paths:
                 302Success:
                   description: 'Successful logout. Redirect to login form.'
                   value: '/login'
+  /register:
 
+    get:
+      operationId: R104
+      summary: 'R104 : Register Form'
+      description: 'Register a new user. Access: PUB'
+      tags:
+        - 'M01: Authentication and Indvidual Profile'
+
+      responses:
+        '200':
+          description: 'Ok. Show Sign-up UI'
+
+    post:
+      operationId: R105
+      summary: 'R105 : Register Action'
+      description: 'Processes the new user registration form submission. Access: PUB'
+      tags:
+        - 'M01: Authentication and Indvidual Profile'
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                name:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+                confirm_password:
+                  type: string
+                  format: password
+                picture:
+                  type: string
+                  format: binary
+              required:
+                - username
+                - name
+                - email
+                - password
+                - confirm_password;
+
+      responses:
+        '302':
+          description: 'Redirect after processing the new user information.'
+          headers:
+            Location:
+              schema:
+                type: string
+              example:
+                302Success:
+                  description: 'Successful registration. Redirect to homepage.'
+                  value: '/home'
+                302Failure:
+                  description: 'Failed registration. Redirect to login form.'
+                  value: '/login'
