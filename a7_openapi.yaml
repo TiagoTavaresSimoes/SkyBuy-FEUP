@@ -1,0 +1,70 @@
+openapi: 3.0.0
+
+info:
+  version: '1.0'
+  title: 'LBAW MediaLibrary Web API'
+  description: 'Web Resources Specification (A7) for MediaLibrary'
+
+servers:
+  - url: http://lbaw.fe.up.pt
+  description: Production server
+
+externalDocs:
+  description: Find more info here.
+  url: https://web.fe.up.pt/~ssn/wiki/teach/lbaw/medialib/a07
+
+tags:
+  - name: 'M01: Authentication and Individual Profile'
+  - name: 'M02: Products'
+  - name: 'M03: Carts and Purchases'
+  - name: 'M04: Reviews and Wishlist'
+  - name: 'M05: User Administration and Information Pages'
+
+paths:
+  /login:
+    get:
+      operationId: R101
+      summary: 'R101: Login Form'
+      description: 'Provide login form. Access: PUB'
+      tags:
+        - 'M01: Authentication and Individual Profile'
+      responses:
+        '200':
+          description: 'Ok. Show Log-in UI'
+    post:
+      operationId: R102
+      summary: 'R102: Login Action'
+      description: 'Processes the login form submission. Access: PUB'
+      tags:
+        - 'M01: Authentication and Individual Profile'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+              required:
+                - email
+                - password
+      responses:
+        '302':
+          description: 'Redirect after processing the login credentials.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful authentication. Redirect to previous page.'
+                302Error:
+                  description: 'Failed authentication. Redirect to previous page.'
+
+
+
