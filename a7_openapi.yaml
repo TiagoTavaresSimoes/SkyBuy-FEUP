@@ -7,7 +7,7 @@ info:
 
 servers:
   - url: http://lbaw.fe.up.pt
-  description: Production server
+    description: Production server
 
 externalDocs:
   description: Find more info here.
@@ -62,9 +62,27 @@ paths:
                 type: string
               examples:
                 302Success:
-                  description: 'Successful authentication. Redirect to previous page.'
+                  description: 'Successful authentication. Redirect to homepage.'
                 302Error:
                   description: 'Failed authentication. Redirect to previous page.'
 
+  /logout:
 
+    get:
+      operationId: R103
+      summary: 'R103 : Logout Action'
+      description: 'Logout the current authenticated user. Access: USR, ADM'
+      tags:
+        - 'M01: Authentication and Individual Profile'
+      responses:
+        '302':
+          description: 'Redirect after processing logout.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful logout. Redirect to login form.'
+                  value: '/login'
 
