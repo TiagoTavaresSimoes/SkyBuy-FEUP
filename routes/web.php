@@ -28,7 +28,11 @@ Route::controller(CardController::class)->group(function () {
     Route::get('/cards/{id}', 'show');
 });
 
+use App\Http\Controllers\HomeController;
 
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+/*
 // API
 Route::controller(CardController::class)->group(function () {
     Route::put('/api/cards', 'create');
@@ -41,7 +45,7 @@ Route::controller(ItemController::class)->group(function () {
     Route::delete('/api/item/{id}', 'delete');
 });
 
-
+*/
 // Authentication
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'showLoginForm')->name('login');

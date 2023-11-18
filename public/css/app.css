@@ -1,12 +1,12 @@
 body {
     background-color: #ffffff;
-    color: #9b4dca;
+    color: #4f695398;
   }
   main > header {
     display: grid;
     grid-template-columns: 1fr auto auto;
     align-items: center;
-    background-color: #d2afe7;
+    background-color: #1e460b;
     padding: 1em;
     margin: 1em;
   }
@@ -86,7 +86,12 @@ body {
     margin: 0 auto;
     padding: 1em;
     max-width: 20em;
-    border: 1px solid #d2afe7;
+    background-color: #f9f9f9;
+    border: 2px solid #9b4dca;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+
   }
   #content > form .error {
     font-weight: bold;
@@ -97,7 +102,7 @@ body {
     color: #106af1;
   }
   #content > form input {
-    background-color: white;
+    background-color: rgb(255, 255, 255);
   }
   @media (max-width: 70em) {
     #cards {
@@ -131,9 +136,10 @@ body {
       margin: 0;
       max-width: 25em;
     }
+    
     article.card {
       margin: 0;
-      border-bottom: 1px solid rgba(96, 108, 118, 0.4);
+      border-bottom: 1px solid rgba(23, 118, 196, 0.4);
     }
   }
   /**
