@@ -4,19 +4,21 @@
 <form method="POST" action="{{ route('main_page') }}">
     {{ csrf_field() }}
     <nav class="navbar">
-    <div class="nav-container">
         <a href="/" class="nav-logo">SkyBuy</a>
-        <div class="nav-items">
-            <a href="/categories">Categories</a>
-            <a href="/account">Your Account</a>
-            <a href="/cart">Cart</a>
-        </div>
-    </div>
-    <div class="search-container">
-        <input type="text" placeholder="Search for a product..." name="search">
-        <button type="submit">Search</button>
-    </div>
-</nav>
+        <div class="nav-container">
+
+            <div class="nav-items">
+                <a href="/categories">Categories</a>
+                <a href="/account">Your Account</a>
+                <a href="/cart">Cart</a>
+            </div>
+
+            <div class="search-container">
+                <input type="text" placeholder="Search for a product..." name="search">
+                <button type="submit">Search</button>
+            </div>
+        </div>        
+    </nav>
     <div class="search-bar">
         <input type="text" placeholder="Search products...">
         <button type="submit">Search</button>
