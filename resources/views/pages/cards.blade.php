@@ -19,10 +19,7 @@
             </div>
         </div>        
     </nav>
-    <div class="search-bar">
-        <input type="text" placeholder="Search products...">
-        <button type="submit">Search</button>
-    </div>
+
 
     <div id="product-grid">
         @for ($i = 0; $i < 10; $i++)
