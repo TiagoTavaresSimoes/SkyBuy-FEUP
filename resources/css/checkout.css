@@ -1,0 +1,113 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: #333;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-logo {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+}
+
+.nav-items a {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+/* Checkout container styles */
+.checkout-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+/* Cart section styles */
+.cart-section {
+    flex: 1;
+    background-color: white;
+    padding: 20px;
+    margin-right: 20px;
+}
+
+.cart-item {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.cart-item img {
+    max-width: 100px;
+    margin-right: 10px;
+}
+
+.cart-item button {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* Checkout section styles */
+.checkout-section {
+    flex: 1;
+    background-color: white;
+    padding: 20px;
+}
+
+/* Form styles (customize as needed) */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form input,
+form select {
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+form button {
+    background-color: #5bc0de;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+/* Footer styles */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
