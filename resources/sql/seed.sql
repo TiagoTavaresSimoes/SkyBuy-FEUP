@@ -29,6 +29,7 @@ IF NOT EXISTS (
         AND NEW.quantity <= product.stock
 )
 
+
 THEN RAISE EXCEPTION 'You cannot add that much quantity to the cart';
 END IF;
 RETURN NULL;
