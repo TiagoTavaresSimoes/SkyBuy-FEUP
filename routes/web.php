@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\CardController;
+
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
@@ -20,29 +20,18 @@ use App\Http\Controllers\Auth\RegisterController;
 */
 
 // Home
-Route::redirect('/', '/login');
+Route::redirect('/', '/home');
+
+Route::get('/', [HomeController::class, 'show'])->name('home');
+Route::post('/search', [HomeController::class, 'search'])->name('search');
 
 Route::get('/profile', 'UserController@profile')->name('profile');
 
 
-// Cards
-Route::controller(CardController::class)->group(function () {
-    Route::get('/cards', 'list')->name('cards');
-    Route::get('/cards/{id}', 'show');
-});
 
-Route::get('/main_page', [HomeController::class, 'index'])->name('main_page');
-// API
-Route::controller(CardController::class)->group(function () {
-    Route::put('/api/cards', 'create');
-    Route::delete('/api/cards/{card_id}', 'delete');
-});
-
-Route::controller(ItemController::class)->group(function () {
-    Route::put('/api/cards/{card_id}', 'create');
-    Route::post('/api/item/{id}', 'update');
-    Route::delete('/api/item/{id}', 'delete');
-});
+Route::get('/users/{id}', [UserProfileController::class, 'showProfile'])->name('users.showProfile');
+Route::get('/home', [HomeController::class, 'show'])->name('home');
+Route::get('/profile', [UserProfileController::class, 'index'])->name('profile.index');
 
 
 // Authentication

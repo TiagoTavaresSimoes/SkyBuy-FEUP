@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'SkyBuy - Your Online Shop')
 @section('content')
-<form method="POST" action="{{ route('main_page') }}">
+<form method="POST" action="{{ route('home') }}">
     {{ csrf_field() }}
     <nav class="navbar">
         <a href="/" class="nav-logo">SkyBuy</a>
@@ -22,15 +22,15 @@
 
 
     <div id="product-grid">
-        @for ($i = 0; $i < 10; $i++)
+        @foreach ($products as $product)
             <div class="product-card">
-                <img src="placeholder-product.jpg" alt="Product Image">
-                <h3>Product Name {{$i}}</h3>
-                <p>Product Description</p>
-                <span>Price: $XX.XX</span>
+                <img src="{{ $product->image_url }}" alt="Product Image">
+                <h3>{{ $product->name }}</h3>
+                <p>{{ $product->description }}</p>
+                <span>Price: ${{ $product->price }}</span>
                 <button>Add to Cart</button>
             </div>
-        @endfor
+        @endforeach
     </div>
 
     <footer>
