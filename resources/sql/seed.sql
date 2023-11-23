@@ -1,167 +1,11 @@
-create schema if not exists lbaw2375;
-CREATE SCHEMA skybuy;
+CREATE SCHEMA IF NOT EXISTS lbaw2375;
 SET search_path TO lbaw2375;
-
-
-CREATE FUNCTION update_product_rating() RETURNS TRIGGER AS
-$BODY$
-BEGIN
-    Update product
-    Set rating = (SELECT avg(review.rating) from review where id_product = NEW.id_product)
-    where product.id_product = NEW.id_product;
-	RETURN NULL;
-END
-$BODY$
-LANGUAGE plpgsql;
-
-CREATE TRIGGER update_product_rating 
-AFTER INSERT OR UPDATE 
-ON review
-FOR EACH ROW
-EXECUTE PROCEDURE update_product_rating(); 
-
-CREATE FUNCTION verify_stock() RETURNS TRIGGER AS
-$BODY$
-BEGIN
-IF NOT EXISTS (
-    SELECT * from product
-    WHERE NEW.id_product = product.id_product
-        AND NEW.quantity <= product.stock
-)
-
-
-THEN RAISE EXCEPTION 'You cannot add that much quantity to the cart';
-END IF;
-RETURN NULL;
-END
-$BODY$
-LANGUAGE plpgsql;
-
-CREATE TRIGGER verify_stock 
-	BEFORE INSERT ON cart_product
-	FOR EACH ROW
-	EXECUTE PROCEDURE verify_stock();
-
-CREATE FUNCTION order_status_notification() RETURNS TRIGGER AS
-$BODY$
-BEGIN
-IF EXISTS (
-    SELECT * from customer 
-    where New.id_customer = customer.id
-)
-THEN INSERT INTO notification(content, id_customer) VALUES ('Your order status has been updated' , New.id_customer);
-END IF;
-RETURN NULL;
-END
-$BODY$
-LANGUAGE plpgsql;
-
-CREATE TRIGGER order_status_notification
-AFTER UPDATE ON purchase
-FOR EACH ROW
-EXECUTE PROCEDURE order_status_notification();
-
-CREATE FUNCTION verify_purchase_for_review() RETURNS TRIGGER AS
-$BODY$
-BEGIN
-    IF EXISTS (
-    SELECT 1
-    FROM purchase p
-    WHERE p.id_customer = NEW.id_customer
-      AND p.id_cart IN (
-        SELECT cp.id_cart
-        FROM cart_product cp
-        WHERE cp.id_product = NEW.id_product
-      )
-  ) THEN
-    RETURN NEW; -- User has purchased the product, allow the review.
-  ELSE
-    RAISE EXCEPTION 'You cannot leave a review without purchasing the product.';
-  END IF;
-END;
-$BODY$
-LANGUAGE plpgsql;
-
-CREATE TRIGGER verify_purchase_for_review 
-BEFORE INSERT ON review
-FOR EACH ROW
-EXECUTE PROCEDURE verify_purchase_for_review();
-
-CREATE FUNCTION check_unique_review() RETURNS TRIGGER AS
-$BODY$
-BEGIN
-IF EXISTS (
-    SELECT 1 FROM review WHERE id_customer = NEW.id_customer AND id_product = NEW.id_product
-) THEN
-    RAISE EXCEPTION 'A user can only write one review per product';
-END IF;
-RETURN NEW;
-END
-$BODY$
-LANGUAGE plpgsql;
-
-CREATE TRIGGER check_unique_review 
-BEFORE INSERT ON review
-FOR EACH ROW
-EXECUTE PROCEDURE check_unique_review();
-
-CREATE FUNCTION quantity_higher_twenty() RETURNS TRIGGER AS
-$BODY$
-BEGIN
-IF NOT EXISTS(
-    SELECT * from product
-    WHERE NEW.id_product = product.id_product 
-	AND NEW.quantity <= 20
-)
-
-THEN RAISE EXCEPTION 'You cannot add more than 20 identical items to the cart';
-END IF;
-RETURN NULL;
-END
-$BODY$
-LANGUAGE plpgsql;
-
-CREATE TRIGGER quantity_higher_twenty
-	BEFORE INSERT ON cart_product
-	FOR EACH ROW
-	EXECUTE PROCEDURE quantity_higher_twenty(); 
-
-BEGIN TRANSACTION;
-
-SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
-
--- Insert a new review
-INSERT INTO review (id_customer, product_id, rating, comment)
-VALUES ($id_customer, $product_id, $rating, $comment);
-
--- Update the product rating
-UPDATE product
-SET rating = (SELECT AVG(rating) FROM review WHERE product_id = $product_id)
-WHERE id_product = $product_id;
-
-END TRANSACTION;
-
-
-BEGIN TRANSACTION;
-
-SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
-
-SELECT stock FROM product WHERE id_product = $id_product;
-
-UPDATE product SET stock = stock - $purchase_quantity WHERE id = $id_product;
-
-INSERT INTO purchase_order(id_customer, id_product, quantity) VALUES ($id_customer, $id_product, $purchase_quantity);
-
-END TRANSACTION;
-
 -----------------------------------------
 --
 -- Use this code to drop and create a schema.
 -- In this case, the DROP TABLE statements can be removed.
 --
-DROP SCHEMA skybuy CASCADE;
-CREATE SCHEMA skybuy;
-SET search_path TO skybuy;
+
 
 -----------------------------------------
 -- Drop old schema
@@ -185,7 +29,7 @@ DROP TABLE IF EXISTS notification CASCADE;
 DROP TABLE IF EXISTS wishlist CASCADE;
 DROP TABLE IF EXISTS faq CASCADE;
 
-DROP TYPE IF EXISTS OrderStauts;
+DROP TYPE IF EXISTS OrderStatus;
 
 -----------------------------------------
 -- Types
@@ -388,13 +232,13 @@ CREATE INDEX review_rating ON review(rating);
 -----------------------------------------
 
 -- TRIGGER TO UPDATE THE RATING OF A PRODUCT WHEN A REVIEW IS ADDED OR CHANGED --
-CREATE FUNCTION update_product_rating() RETURNS TRIGGER AS
+CREATE OR REPLACE FUNCTION update_product_rating() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-    Update product
-    Set rating = (SELECT avg(review.rating) from review where id_product = NEW.id_product)
-    where product.id_product = NEW.id_product;
-	RETURN NULL;
+    UPDATE product
+    SET rating = (SELECT avg(review.rating) FROM review WHERE id_product = NEW.id_product)
+    WHERE product.id_product = NEW.id_product;
+    RETURN NULL;
 END
 $BODY$
 LANGUAGE plpgsql;
@@ -403,11 +247,11 @@ CREATE TRIGGER update_product_rating
 AFTER INSERT OR UPDATE 
 ON review
 FOR EACH ROW
-EXECUTE PROCEDURE update_product_rating(); 
+EXECUTE PROCEDURE update_product_rating();
 
 
 -- TRIGGER TO PREVENT A USER FROM ADDING MORE ITEMS TO THE CART THAN THE AVAILABLE STOCK
-CREATE FUNCTION verify_stock() RETURNS TRIGGER AS
+CREATE OR REPLACE FUNCTION verify_stock() RETURNS TRIGGER AS
 $BODY$
 BEGIN
 IF NOT EXISTS(
@@ -429,7 +273,7 @@ CREATE TRIGGER verify_stock
 	EXECUTE PROCEDURE verify_stock(); 
 
 -- TRIGGER TO SEND A NOTIFICATION TO THE CUSTOMER WHEN THERE IS A CHANGE OF STATUS IN THEIR ORDER
-CREATE FUNCTION order_status_notification() RETURNS TRIGGER AS
+CREATE OR REPLACE FUNCTION order_status_notification() RETURNS TRIGGER AS
 $BODY$
 BEGIN
 IF EXISTS (
@@ -476,7 +320,7 @@ EXECUTE PROCEDURE order_status_notification();
 --EXECUTE PROCEDURE verify_purchase_for_review();
 
 --TRIGGER TO ENSURACE THAT A USER CAN ONLY WRITE ONE REVIEW FOR EACH PRODUCT
-CREATE FUNCTION check_unique_review() RETURNS TRIGGER AS
+CREATE OR REPLACE FUNCTION check_unique_review() RETURNS TRIGGER AS
 $BODY$
 BEGIN
 IF EXISTS (
@@ -495,7 +339,7 @@ FOR EACH ROW
 EXECUTE PROCEDURE check_unique_review();
 
 -- TRIGGER TO PREVENT A USER FROM ADDING MORE THAN 20 IDENTICAL ITEMS TO THE CART 
-CREATE FUNCTION quantity_higher_twenty() RETURNS TRIGGER AS
+CREATE OR REPLACE FUNCTION quantity_higher_twenty() RETURNS TRIGGER AS
 $BODY$
 BEGIN
 IF NOT EXISTS(
@@ -515,6 +359,93 @@ CREATE TRIGGER quantity_higher_twenty
 	BEFORE INSERT ON cart_product
 	FOR EACH ROW
 	EXECUTE PROCEDURE quantity_higher_twenty();
+
+
+-- create schema if not exists lbaw2375;
+-- CREATE SCHEMA skybuy;
+-- SET search_path TO lbaw2375;
+
+
+
+
+-- CREATE FUNCTION order_status_notification() RETURNS TRIGGER AS
+-- $BODY$
+-- BEGIN
+-- IF EXISTS (
+--     SELECT * from customer 
+--     where New.id_customer = customer.id
+-- )
+-- THEN INSERT INTO notification(content, id_customer) VALUES ('Your order status has been updated' , New.id_customer);
+-- END IF;
+-- RETURN NULL;
+-- END
+-- $BODY$
+-- LANGUAGE plpgsql;
+
+-- CREATE TRIGGER order_status_notification
+-- AFTER UPDATE ON purchase
+-- FOR EACH ROW
+-- EXECUTE PROCEDURE order_status_notification();
+
+CREATE OR REPLACE FUNCTION verify_purchase_for_review() RETURNS TRIGGER AS
+$BODY$
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM purchase p
+        WHERE p.id_customer = NEW.id_customer
+          AND p.id_cart IN (
+            SELECT cp.id_cart
+            FROM cart_product cp
+            WHERE cp.id_product = NEW.id_product
+          )
+    ) THEN
+        -- The exception has been commented out to allow the review regardless of purchase.
+        -- RAISE EXCEPTION 'You cannot leave a review without purchasing the product.';
+    END IF;
+    RETURN NEW;
+END;
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER verify_purchase_for_review 
+BEFORE INSERT ON review
+FOR EACH ROW
+EXECUTE PROCEDURE verify_purchase_for_review();
+
+
+
+
+
+-- BEGIN TRANSACTION;
+
+-- SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+
+-- -- Insert a new review
+-- INSERT INTO review (id_customer, product_id, rating, comment)
+-- VALUES ($id_customer, $product_id, $rating, $comment);
+
+-- -- Update the product rating
+-- UPDATE product
+-- SET rating = (SELECT AVG(rating) FROM review WHERE product_id = $product_id)
+-- WHERE id_product = $product_id;
+
+-- END TRANSACTION;
+
+
+-- BEGIN TRANSACTION;
+
+-- SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+
+-- SELECT stock FROM product WHERE id_product = $id_product;
+
+-- UPDATE product SET stock = stock - $purchase_quantity WHERE id = $id_product;
+
+-- INSERT INTO purchase_order(id_customer, id_product, quantity) VALUES ($id_customer, $id_product, $purchase_quantity);
+
+-- END TRANSACTION;
+
+
 
 ------------------------------------------------------- account ------------------------------------------------------
 INSERT INTO account (id_account, username, password, email) 
