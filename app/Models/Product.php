@@ -8,7 +8,7 @@ class Product extends Model{
     public $timestamps  = true;
 
 
-    protected $table = 'skybuy.products';
+    protected $table = 'product';
 
     protected $fillable = [
         'name',
@@ -23,3 +23,4 @@ class Product extends Model{
 
 
 }
+

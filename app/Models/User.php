@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -13,16 +12,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use Notifiable;
 
-    // Don't add create and update timestamps in database.
+    protected $table = 'account'; // This should match your table name in PostgreSQL
+    protected $primaryKey = 'id_account';
     public $timestamps  = false;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+
     protected $fillable = [
         'name',
         'email',
@@ -30,31 +26,18 @@ class User extends Authenticatable
         'address',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
-
-    /**
-     * Get the cards for a user.
-     */
-    public function cards(): HasMany
+    public function customer()
     {
-        return $this->hasMany(Card::class);
+        return $this->hasOne(Customer::class, 'id_customer', 'id_account');
     }
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class, 'id_customer', 'id_account');
+    }
+    
+    
 }
