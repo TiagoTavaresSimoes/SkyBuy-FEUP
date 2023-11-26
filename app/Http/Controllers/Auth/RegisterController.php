@@ -28,21 +28,28 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:250',
-            'email' => 'required|email|max:250|unique:users',
-            'password' => 'required|min:8|confirmed'
+            'username' => 'required|string|max:250|unique:account,username',
+            'email' => 'required|email|max:250|unique:account,email',
+            'password' => 'required|min:8|confirmed',
+            'phone' => 'required|string|max:14'
         ]);
 
         User::create([
-            'name' => $request->name,
+            'username' => $request->username,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'phone' => $request->phone
         ]);
 
         $credentials = $request->only('email', 'password');
-        Auth::attempt($credentials);
-        $request->session()->regenerate();
-        return redirect()->route('home')
-            ->withSuccess('You have successfully registered & logged in!');
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->route('home')
+                ->withSuccess('You have successfully registered & logged in!');
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
     }
 }
