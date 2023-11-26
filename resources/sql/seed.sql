@@ -28,7 +28,6 @@ DROP TABLE IF EXISTS transfer CASCADE;
 DROP TABLE IF EXISTS notification CASCADE;
 DROP TABLE IF EXISTS wishlist CASCADE;
 DROP TABLE IF EXISTS faq CASCADE;
-
 DROP TYPE IF EXISTS OrderStatus;
 
 -----------------------------------------
@@ -449,9 +448,9 @@ EXECUTE PROCEDURE verify_purchase_for_review();
 
 ------------------------------------------------------- account ------------------------------------------------------
 INSERT INTO account (id_account, username, password, email) 
-VALUES (1, 'up201905383', 'P@ssw0rd123', 'up201905383@up.pt');
+VALUES (1, 'up201905383', '$2y$10$JfQFHdLy5bH7JJgeQnJHlem3T4Q/nVarXvmnSgZLq3AGniJ/PNMsC', 'up201905383@up.pt');
 INSERT INTO account (id_account, username, password, email) 
-VALUES (2, 'up202108723', 'Secur1ty$tr0ng', 'up202108723@up.pt');
+VALUES (2, 'up202108723', '$2y$10$4MmzZKTIb26mysFO0KrSW.NZjBiYrGxRvfTatCcY9uNpOqZUuWAse', 'up202108723@up.pt');
 INSERT INTO account (id_account, username, password, email) 
 VALUES (3, 'up202006525', '9LongerP@ss', 'up202006525@up.pt');
 INSERT INTO account (id_account, username, password, email) 
