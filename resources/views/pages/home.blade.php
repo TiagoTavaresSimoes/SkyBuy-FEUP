@@ -3,22 +3,7 @@
 @section('content')
 <form method="POST" action="{{ route('home') }}">
     {{ csrf_field() }}
-    <nav class="navbar">
-        <a href="/" class="nav-logo">SkyBuy</a>
-        <div class="nav-container">
-
-            <div class="nav-items">
-                <a href="/categories">Categories</a>
-                <a href="/account">Your Account</a>
-                <a href="/cart">Cart</a>
-            </div>
-
-            <div class="search-container">
-                <input type="text" placeholder="Search for a product..." name="search">
-                <button type="submit">Search</button>
-            </div>
-        </div>        
-    </nav>
+    
 
 
     <div id="product-grid">

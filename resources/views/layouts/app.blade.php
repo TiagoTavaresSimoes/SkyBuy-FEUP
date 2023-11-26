@@ -22,17 +22,35 @@
     </head>
     <body>
         <main>
-            <header>
-                <h1><a href="{{ url('/cards') }}">SkyBuy</a></h1>
-                @if (Auth::check())
-                    <a class="button" href="{{ url('/profile') }}">Profile</a>
-                    <a class="button" href="{{ url('/logout') }}"> Logout </a> <span>{{ Auth::user()->name }}</span>
+            <header class="navbar">
+                <a href="{{ route('home') }}" class="nav-logo">SkyBuy</a>
+                <div class="nav-container">
+                    <!-- Links da navegação -->
+                    <a href="{{ route('home') }}" class="nav-items">Home</a>
+                    <a href="/categories" class="nav-items">Categories</a>
+                    <a href="{{ route('account') }}">Your Account</a>
+                    <a href="/cart" class="nav-items">Cart</a>
 
-                @endif
+                    <!-- Botão de Login/Logout -->
+                    @if (Auth::check())
+                        <a href="{{ route('profile.index') }}" class="nav-items">Profile</a>
+                        <form action="{{ route('logout') }}" method="POST" class="nav-items" style="display: inline;">
+                            @csrf
+                            <button type="submit" class="login-button">Logout</button>
+                        </form>
+                        <span class="nav-items">{{ Auth::user()->name }}</span>
+                    @else
+                        <a href="{{ route('login') }}" class="login-button">Login</a>
+                    @endif
+                </div>
             </header>
             <section id="content">
                 @yield('content')
             </section>
+            <footer>
+                <!-- Footer Content -->
+                <p>© 2023 Your Website Name. All rights reserved.</p>
+            </footer>
         </main>
     </body>
 </html>

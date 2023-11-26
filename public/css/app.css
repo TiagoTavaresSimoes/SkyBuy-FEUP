@@ -92,3 +92,45 @@ footer {
   bottom: 0;
   width: 100%;
 }
+
+.login-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 12px;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background-color: #45a049;
+}
+
+.nav-items {
+  color: white;
+  text-decoration: none;
+  margin-right: 20px;
+  display: inline-block;
+  padding: 8px 12px; 
+}
+
+.login-button, .nav-items button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 12px;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.nav-items button {
+  background-color: transparent; 
+  color: white; 
+}
+
+.login-button:hover, .nav-items button:hover {
+  background-color: #45a049; 
+}
