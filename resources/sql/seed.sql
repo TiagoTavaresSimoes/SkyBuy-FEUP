@@ -493,11 +493,12 @@ INSERT INTO cart (id_cart) VALUES (13);
 INSERT INTO cart (id_cart) VALUES (14);
 INSERT INTO cart (id_cart) VALUES (15);
 INSERT INTO cart (id_cart) VALUES (16);
+/*
 INSERT INTO cart (id_cart) VALUES (17);
 INSERT INTO cart (id_cart) VALUES (18);
 INSERT INTO cart (id_cart) VALUES (19);
 INSERT INTO cart (id_cart) VALUES (20);
-
+*/
 ------------------ customer --------------------
 INSERT INTO customer VALUES (5, 5);
 INSERT INTO customer VALUES (6, 6);
@@ -511,11 +512,12 @@ INSERT INTO customer VALUES (13, 13);
 INSERT INTO customer VALUES (14, 14);
 INSERT INTO customer VALUES (15, 15);
 INSERT INTO customer VALUES (16, 16);
+/*
 INSERT INTO customer VALUES (17, 17);
 INSERT INTO customer VALUES (18, 18);
 INSERT INTO customer VALUES (19, 19);
 INSERT INTO customer VALUES (20, 20);
-
+*/
 ------------- admin -------------
 INSERT INTO admin VALUES (1);
 INSERT INTO admin VALUES (2);
