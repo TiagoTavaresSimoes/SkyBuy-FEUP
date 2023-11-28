@@ -8,7 +8,7 @@
 
     <div id="product-grid">
         @foreach ($products as $product)
-        <a href="/product">
+        <a href="/product/{{$product->id_product}}/{{$product->name}}/{{$product->price}}/{{$product->size}}/{{$product->stock}}/{{$product->brand}}/{{$product->rating}}/{{$product->description}}">
             <div class="product-card">
                     <img src="{{ $product->image_url }}" alt="Product Image">
                 <h3>{{ $product->name }}</h3>

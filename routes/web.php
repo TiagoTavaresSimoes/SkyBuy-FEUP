@@ -28,8 +28,17 @@ Route::post('/search', [HomeController::class, 'search'])->name('search');
 
 Route::get('/profile', 'UserController@profile')->name('profile');
 
-Route::get('/product', function(){
-    return view('product');
+Route::get('/product/{id_product}/{name}/{price}/{size}/{stock}/{brand}/{rating}/{description}', function($id_product, $name, $price, $size, $stock, $brand, $rating, $description){
+    return view('product',[
+        'id_product' => $id_product,
+        'name' => $name,
+        'price' => $price,
+        'size' => $size,
+        'stock' => $stock,
+        'brand' => $brand,
+        'rating' => $rating,
+        'description' => $description
+    ]);
 });
 
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');

@@ -37,12 +37,12 @@
         </div>
     </header>
     <div class="produto">
-      <h2>produto</h2>
-      <p class="preco">preco</p>
-      <p>descricao</p>
-      <p>envio</p>
-      <p>entrega</p>
-      <p>retorno</p>
+        <h2><?php echo $name; ?></h2>
+        <p>Marca: <?php echo $brand; ?></p>
+        <p>Tamanho: <?php echo $size; ?></p>
+        <p>Rating: <?php echo $rating; ?></p>
+        <p class="preco">Preço: <?php echo $price; ?></p>
+        <p>Descrição: <?php echo $description; ?></p>
     </div>
   </body>
 </html>
