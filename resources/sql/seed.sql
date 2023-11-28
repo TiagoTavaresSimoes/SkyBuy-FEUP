@@ -28,7 +28,6 @@ DROP TABLE IF EXISTS transfer CASCADE;
 DROP TABLE IF EXISTS notification CASCADE;
 DROP TABLE IF EXISTS wishlist CASCADE;
 DROP TABLE IF EXISTS faq CASCADE;
-
 DROP TYPE IF EXISTS OrderStatus;
 
 -----------------------------------------
@@ -448,46 +447,38 @@ EXECUTE PROCEDURE verify_purchase_for_review();
 
 
 ------------------------------------------------------- account ------------------------------------------------------
-INSERT INTO account (id_account, username, password, email) 
-VALUES (1, 'up201905383', 'P@ssw0rd123', 'up201905383@up.pt');
-INSERT INTO account (id_account, username, password, email) 
-VALUES (2, 'up202108723', 'Secur1ty$tr0ng', 'up202108723@up.pt');
-INSERT INTO account (id_account, username, password, email) 
-VALUES (3, 'up202006525', '9LongerP@ss', 'up202006525@up.pt');
-INSERT INTO account (id_account, username, password, email) 
-VALUES (4, 'up202108857', '$afeP@ssw0rd7', 'up202108857@up.pt');
-INSERT INTO account (id_account, username, password, email, phone, is_banned, profile_pic)
-VALUES (5, 'JohnDoe', 'password123', 'john.doe@example.com', 123456789, false, 'images/john_doe.jpg');
-INSERT INTO account (id_account, username, password, email, phone, is_banned, profile_pic)
-VALUES (6, 'JaneSmith', 'password456', 'jane.smith@example.com', 987654321, false, 'images/jane_smith.jpg');
-INSERT INTO account (id_account, username, password, email, phone, is_banned, profile_pic)
-VALUES (7, 'MikeJohnson', 'securepass', 'mike.johnson@example.com', 555555555, false, 'images/mike_johnson.jpg');
-INSERT INTO account (id_account, username, password, email, phone, is_banned, profile_pic)
-VALUES (8, 'EmilyDavis', 'pass12345', 'emily.davis@example.com', 999999999, false, 'images/emily_davis.jpg');
-INSERT INTO account (id_account, username, password, email, phone, is_banned, profile_pic)
-VALUES (9, 'SarahBrown', 'passSarah', 'sarah.brown@example.com', 777777777, false, 'images/sarah_brown.jpg');
-INSERT INTO account (id_account, username, password, email, phone, is_banned, profile_pic)
-VALUES (10, 'DavidWilson', 'david1234', 'david.wilson@example.com', 888888888, false, 'images/david_wilson.jpg');
-INSERT INTO account (id_account, username, password, email, phone, is_banned, profile_pic)
-VALUES (11, 'OliviaLee', 'olivia456', 'olivia.lee@example.com', 111111111, false, 'images/olivia_lee.jpg');
-INSERT INTO account (id_account, username, password, email, phone, is_banned, profile_pic)
-VALUES (12, 'JamesSmith', 'jamespass', 'james.smith@example.com', 222222222, false, 'images/james_smith.jpg');
-INSERT INTO account (id_account, username, password, email, phone, is_banned, profile_pic)
-VALUES (13, 'AvaWilson', 'ava456789', 'ava.wilson@example.com', 333333333, false, 'images/ava_wilson.jpg');
-INSERT INTO account (id_account, username, password, email, phone, is_banned, profile_pic)
-VALUES (14, 'WilliamJohnson', 'william123', 'william.johnson@example.com', 444444444, false, 'images/william_johnson.jpg');
-INSERT INTO account (id_account, username, password, email, phone, is_banned, profile_pic)
-VALUES (15, 'SophiaTaylor', 'sophia1234', 'sophia.taylor@example.com', 555555555, false, 'images/sophia_taylor.jpg');
-INSERT INTO account (id_account, username, password, email, phone, is_banned, profile_pic)
-VALUES (16, 'LiamDavis', 'liam56789', 'liam.davis@example.com', 666666666, false, 'images/liam_davis.jpg');
-INSERT INTO account (id_account, username, password, email, phone, is_banned, profile_pic)
-VALUES (17, 'IsabellaBrown', 'isabella123', 'isabella.brown@example.com', 777777777, false, 'images/isabella_brown.jpg');
-INSERT INTO account (id_account, username, password, email, phone, is_banned, profile_pic)
-VALUES (18, 'BenjaminLee', 'benjaminpass', 'benjamin.lee@example.com', 888888888, false, 'images/benjamin_lee.jpg');
-INSERT INTO account (id_account, username, password, email, phone, is_banned, profile_pic)
-VALUES (19, 'MiaWilson', 'miapass123', 'mia.wilson@example.com', 999999999, false, 'images/mia_wilson.jpg');
-INSERT INTO account (id_account, username, password, email, phone, is_banned, profile_pic)
-VALUES (20, 'NoahSmith', 'noah12345', 'noah.smith@example.com', 111111111, false, 'images/noah_smith.jpg');
+INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
+VALUES ('JohnDoe', '$2y$10$h4beFuHuFJtkZv1r/.umg.8MsMyOLu8A.BSbJkncDWs8sBQOY35.m', 'john.doe@example.com', 123456789, false, 'images/john_doe.jpg');
+INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
+VALUES ('JaneSmith', '$2y$10$ncTnG6D0GeY1yrdo9ZJzregCzrln6CUnkA9awxkKyO.iSfHadBYx6', 'jane.smith@example.com', 987654321, false, 'images/jane_smith.jpg');
+INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
+VALUES ('MikeJohnson', '$2y$10$HKzAuLep/qUYlq6zfwV.xuIpd2HWJy2ucQpu11p0a10huPL0HGbvW', 'mike.johnson@example.com', 555555555, false, 'images/mike_johnson.jpg');
+INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
+VALUES ('EmilyDavis', '$2y$10$KYzaZbQI/uH19EVH4zwMA.FBjYrVuSt8iTQy8tjSCqpEUHD1uoTjm', 'emily.davis@example.com', 999999999, false, 'images/emily_davis.jpg');
+INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
+VALUES ('SarahBrown', '$2y$10$FQzLpKZhae1xtLM7c3Fzbe7FkmEHYMSBxNdcQhGn6gncXR8g5gILC', 'sarah.brown@example.com', 777777777, false, 'images/sarah_brown.jpg');
+INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
+VALUES ('DavidWilson', 'david1234', 'david.wilson@example.com', 888888888, false, 'images/david_wilson.jpg');
+INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
+VALUES ('OliviaLee', 'olivia456', 'olivia.lee@example.com', 111111111, false, 'images/olivia_lee.jpg');
+INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
+VALUES ('JamesSmith', 'jamespass', 'james.smith@example.com', 222222222, false, 'images/james_smith.jpg');
+INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
+VALUES ('AvaWilson', 'ava456789', 'ava.wilson@example.com', 333333333, false, 'images/ava_wilson.jpg');
+INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
+VALUES ('WilliamJohnson', 'william123', 'william.johnson@example.com', 444444444, false, 'images/william_johnson.jpg');
+INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
+VALUES ('SophiaTaylor', 'sophia1234', 'sophia.taylor@example.com', 555555555, false, 'images/sophia_taylor.jpg');
+INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
+VALUES ('LiamDavis', 'liam56789', 'liam.davis@example.com', 666666666, false, 'images/liam_davis.jpg');
+INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
+VALUES ('IsabellaBrown', 'isabella123', 'isabella.brown@example.com', 777777777, false, 'images/isabella_brown.jpg');
+INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
+VALUES ('BenjaminLee', 'benjaminpass', 'benjamin.lee@example.com', 888888888, false, 'images/benjamin_lee.jpg');
+INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
+VALUES ('MiaWilson', 'miapass123', 'mia.wilson@example.com', 999999999, false, 'images/mia_wilson.jpg');
+INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
+VALUES ('NoahSmith', '$2y$10$NYThpaYcLQko0nbkd5SL0uOV5CCnmgkdM22UogoWR0VoChKD1.xgy', 'noah.smith@example.com', 111111111, false, 'images/noah_smith.jpg');
 
 -------------- cart ---------------
 INSERT INTO cart (id_cart) VALUES (5);
@@ -502,11 +493,12 @@ INSERT INTO cart (id_cart) VALUES (13);
 INSERT INTO cart (id_cart) VALUES (14);
 INSERT INTO cart (id_cart) VALUES (15);
 INSERT INTO cart (id_cart) VALUES (16);
+/*
 INSERT INTO cart (id_cart) VALUES (17);
 INSERT INTO cart (id_cart) VALUES (18);
 INSERT INTO cart (id_cart) VALUES (19);
 INSERT INTO cart (id_cart) VALUES (20);
-
+*/
 ------------------ customer --------------------
 INSERT INTO customer VALUES (5, 5);
 INSERT INTO customer VALUES (6, 6);
@@ -520,11 +512,12 @@ INSERT INTO customer VALUES (13, 13);
 INSERT INTO customer VALUES (14, 14);
 INSERT INTO customer VALUES (15, 15);
 INSERT INTO customer VALUES (16, 16);
+/*
 INSERT INTO customer VALUES (17, 17);
 INSERT INTO customer VALUES (18, 18);
 INSERT INTO customer VALUES (19, 19);
 INSERT INTO customer VALUES (20, 20);
-
+*/
 ------------- admin -------------
 INSERT INTO admin VALUES (1);
 INSERT INTO admin VALUES (2);

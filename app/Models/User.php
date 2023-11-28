@@ -12,23 +12,21 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
+    protected $table = 'account';
     use Notifiable;
 
-    protected $table = 'account'; // This should match your table name in PostgreSQL
+
     protected $primaryKey = 'id_account';
     public $timestamps  = false;
 
 
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'address',
+        'username', 'email', 'password', 'phone', 'is_banned', 'profile_pic'
     ];
 
     protected $hidden = [
         'password',
-        'remember_token',
+        'remember_token'
     ];
     public function customer()
     {
