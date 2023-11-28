@@ -448,37 +448,37 @@ EXECUTE PROCEDURE verify_purchase_for_review();
 
 ------------------------------------------------------- account ------------------------------------------------------
 INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
-VALUES ('JohnDoe', '$2y$10$h4beFuHuFJtkZv1r/.umg.8MsMyOLu8A.BSbJkncDWs8sBQOY35.m', 'john.doe@example.com', 123456789, false, 'images/john_doe.jpg');
+VALUES ('JohnDoe', '$2y$10$Sfol.jyCBqrXB/SCTbGpjO8Dspbsl93hgZY70NKwCILmsp6HW47Yu', 'john.doe@example.com', 123456789, false, 'images/john_doe.jpg'); --password123
 INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
-VALUES ('JaneSmith', '$2y$10$ncTnG6D0GeY1yrdo9ZJzregCzrln6CUnkA9awxkKyO.iSfHadBYx6', 'jane.smith@example.com', 987654321, false, 'images/jane_smith.jpg');
+VALUES ('JaneSmith', '$2y$10$trw1ufmckUw1ATii4ovS.OLXl.PqKkxicXkC8p9yuCEHZ4MLYaD5W', 'jane.smith@example.com', 987654321, false, 'images/jane_smith.jpg'); --password456
 INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
-VALUES ('MikeJohnson', '$2y$10$HKzAuLep/qUYlq6zfwV.xuIpd2HWJy2ucQpu11p0a10huPL0HGbvW', 'mike.johnson@example.com', 555555555, false, 'images/mike_johnson.jpg');
+VALUES ('MikeJohnson', '$2y$10$zT1eHCw/yTP.ZkEXagOtCOEK.hop90gwCFLgq.Akb9/6CfgrrzVIy', 'mike.johnson@example.com', 555555555, false, 'images/mike_johnson.jpg'); --securepass
 INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
-VALUES ('EmilyDavis', '$2y$10$KYzaZbQI/uH19EVH4zwMA.FBjYrVuSt8iTQy8tjSCqpEUHD1uoTjm', 'emily.davis@example.com', 999999999, false, 'images/emily_davis.jpg');
+VALUES ('EmilyDavis', '$2y$10$Qxv3GtyRLwAU/Cf.iezreOHk/kOZ78enRQSC5BeXJpHSAMyxggq62', 'emily.davis@example.com', 999999999, false, 'images/emily_davis.jpg'); --pass12345
 INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
-VALUES ('SarahBrown', '$2y$10$FQzLpKZhae1xtLM7c3Fzbe7FkmEHYMSBxNdcQhGn6gncXR8g5gILC', 'sarah.brown@example.com', 777777777, false, 'images/sarah_brown.jpg');
+VALUES ('SarahBrown', '$2y$10$rmbqevAxsrElW/bE/GtWNuT9UDsM/sBv5VOSC0TXT.qXUcwMr.aE2', 'sarah.brown@example.com', 777777777, false, 'images/sarah_brown.jpg'); --passSarah
 INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
-VALUES ('DavidWilson', 'david1234', 'david.wilson@example.com', 888888888, false, 'images/david_wilson.jpg');
+VALUES ('DavidWilson', '$2y$10$Ue80XwqbOX4yLAtuKf4YvefvBWyHcxP4zqrzRDS2kC5u4UntlL8W6', 'david.wilson@example.com', 888888888, false, 'images/david_wilson.jpg'); --david1234
 INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
-VALUES ('OliviaLee', 'olivia456', 'olivia.lee@example.com', 111111111, false, 'images/olivia_lee.jpg');
+VALUES ('OliviaLee', '$2y$10$pp9HtxMGf0FY9j91iTFKAurqA.3M95MqxFPyzNrqVUO6idQTxpCnq', 'olivia.lee@example.com', 111111111, false, 'images/olivia_lee.jpg'); --olivia456
 INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
-VALUES ('JamesSmith', 'jamespass', 'james.smith@example.com', 222222222, false, 'images/james_smith.jpg');
+VALUES ('JamesSmith', '$2y$10$eJI74ZPkGSEc/8z.YoQZZ.xrx5CSw4Xrz0HxbJJucj8eY8QZ/LbRi', 'james.smith@example.com', 222222222, false, 'images/james_smith.jpg'); --jamespass
 INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
-VALUES ('AvaWilson', 'ava456789', 'ava.wilson@example.com', 333333333, false, 'images/ava_wilson.jpg');
+VALUES ('AvaWilson', '$2y$10$bnUYLAdynmZhLdjJlGl/m.gXoYpA.PyDwItCJ1j9KIaX5e.z1j0FS', 'ava.wilson@example.com', 333333333, false, 'images/ava_wilson.jpg'); --ava456789
 INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
-VALUES ('WilliamJohnson', 'william123', 'william.johnson@example.com', 444444444, false, 'images/william_johnson.jpg');
+VALUES ('WilliamJohnson', '$2y$10$m5uv3IkrUEVFkkUn8E8hvO6WtM/T5i1.o1wJonVOaq.GOLzu9A1Nm', 'william.johnson@example.com', 444444444, false, 'images/william_johnson.jpg'); --william123
 INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
-VALUES ('SophiaTaylor', 'sophia1234', 'sophia.taylor@example.com', 555555555, false, 'images/sophia_taylor.jpg');
+VALUES ('SophiaTaylor', '$2y$10$k840IhorUuY0nv3v/1mN4.AgBR8KXOoAfNI6KAWnVSrhED/NBTJ.i', 'sophia.taylor@example.com', 555555555, false, 'images/sophia_taylor.jpg'); --sophia1234
 INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
-VALUES ('LiamDavis', 'liam56789', 'liam.davis@example.com', 666666666, false, 'images/liam_davis.jpg');
+VALUES ('LiamDavis', '$2y$10$X0UuOa8GCtKfRwDAYD.3qejChSGvWS762I9UxdNysDLalOZSnJ.8.', 'liam.davis@example.com', 666666666, false, 'images/liam_davis.jpg'); --liam56789
 INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
-VALUES ('IsabellaBrown', 'isabella123', 'isabella.brown@example.com', 777777777, false, 'images/isabella_brown.jpg');
+VALUES ('IsabellaBrown', '$2y$10$U0dW.ClEqaTnHm2NmAgxKusl7cShtN0A6gXaURr6u4aO7q8nMZIOO', 'isabella.brown@example.com', 777777777, false, 'images/isabella_brown.jpg'); --isabella123
 INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
-VALUES ('BenjaminLee', 'benjaminpass', 'benjamin.lee@example.com', 888888888, false, 'images/benjamin_lee.jpg');
+VALUES ('BenjaminLee', '$2y$10$LbCTZJHihNPW.N6ZUoNtw.0KriFQIE65XSTMoFl.X0Lj/ApMpuvlO', 'benjamin.lee@example.com', 888888888, false, 'images/benjamin_lee.jpg'); --benjaminpass
 INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
-VALUES ('MiaWilson', 'miapass123', 'mia.wilson@example.com', 999999999, false, 'images/mia_wilson.jpg');
+VALUES ('MiaWilson', '$2y$10$x9ai2MLpSjwCyRmyVm5tOu89HxXCGThzOjvZDcdOR8utGPgfE8Ys.', 'mia.wilson@example.com', 999999999, false, 'images/mia_wilson.jpg'); --miapass123
 INSERT INTO account (username, password, email, phone, is_banned, profile_pic)
-VALUES ('NoahSmith', '$2y$10$NYThpaYcLQko0nbkd5SL0uOV5CCnmgkdM22UogoWR0VoChKD1.xgy', 'noah.smith@example.com', 111111111, false, 'images/noah_smith.jpg');
+VALUES ('NoahSmith', '$2y$10$6.vGEcM9yw.GuYZ2O2QxZOclOK8SzEyMu4eQoItJqfnSbtOcABYOO', 'noah.smith@example.com', 111111111, false, 'images/noah_smith.jpg'); --noah12345
 
 -------------- cart ---------------
 INSERT INTO cart (id_cart) VALUES (5);
