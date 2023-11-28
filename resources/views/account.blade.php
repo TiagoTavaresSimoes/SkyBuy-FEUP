@@ -4,5 +4,12 @@
 
 @section('content')
     <h1>Your Account Details</h1>
-    <!-- Add the account details here -->
+    <div>
+        <p><strong>Username:</strong> {{ $user->username }}</p>
+        <p><strong>Email:</strong> {{ $user->email }}</p>
+        <p><strong>Phone:</strong> {{ $user->phone }}</p>
+        <p><strong>Profile Picture:</strong></p>
+        <img src="{{ asset($user->profile_pic) }}" alt="Profile Picture" style="width: 150px; height: 150px;">
+        <p><strong>Status:</strong> {{ $user->is_banned ? 'Banned' : 'Active' }}</p>
+    </div>
 @endsection
