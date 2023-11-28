@@ -8,13 +8,15 @@
 
     <div id="product-grid">
         @foreach ($products as $product)
+        <a href="/product">
             <div class="product-card">
-                <img src="{{ $product->image_url }}" alt="Product Image">
+                    <img src="{{ $product->image_url }}" alt="Product Image">
                 <h3>{{ $product->name }}</h3>
                 <p>{{ $product->description }}</p>
                 <span>Price: ${{ $product->price }}</span>
                 <button>Add to Cart</button>
             </div>
+            </a>
         @endforeach
     </div>
 

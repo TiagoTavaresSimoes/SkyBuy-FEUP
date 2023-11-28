@@ -134,3 +134,9 @@ footer {
 .login-button:hover, .nav-items button:hover {
   background-color: #45a049; 
 }
+
+#product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjust the minimum and maximum width as needed */
+  gap: 20px; /* Adjust the gap between items as needed */
+}

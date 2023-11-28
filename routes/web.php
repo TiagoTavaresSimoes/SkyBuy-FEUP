@@ -28,6 +28,9 @@ Route::post('/search', [HomeController::class, 'search'])->name('search');
 
 Route::get('/profile', 'UserController@profile')->name('profile');
 
+Route::get('/product', function(){
+    return view('product');
+});
 
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/users/{id}', [UserProfileController::class, 'showProfile'])->name('users.showProfile');

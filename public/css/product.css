@@ -1,0 +1,15 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.produto {
+    width: 300px;
+    padding: 10px;
+    margin: 0 auto;
+    border: none;
+}
+
+.preco {
+    color: #B12704;
+    font-size: 18px;
+}
