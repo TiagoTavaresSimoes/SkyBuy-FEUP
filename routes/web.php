@@ -40,19 +40,14 @@ Route::get('/home', [HomeController::class, 'show'])->name('home');
 Route::get('/login', 'AuthController@login');
 
 // Authentication
-Route::controller(LoginController::class)->group(function () {
-    Route::get('/login', 'showLoginForm')->name('login');
-    Route::post('/login', 'authenticate');
-    Route::get('/logout', 'logout')->name('logout');
-});
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::controller(RegisterController::class)->group(function () {
-    Route::get('/register', 'showRegistrationForm')->name('register');
-    Route::post('/register', 'register');
-});
 
-Route::get('/account', function () {
-    return view('account');
-})->middleware('auth')->name('account');
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
+
+Route::get('/account', [AccountController::class, 'index'])->middleware('auth')->name('account');
 
 Route::get('/account', [AccountController::class, 'index'])->middleware('auth')->name('account');
