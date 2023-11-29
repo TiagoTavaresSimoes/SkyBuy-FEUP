@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,3 +61,6 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/account', [AccountController::class, 'index'])->middleware('auth')->name('account');
 
 Route::get('/account', [AccountController::class, 'index'])->middleware('auth')->name('account');
+
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+

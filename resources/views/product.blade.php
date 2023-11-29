@@ -43,6 +43,8 @@
         <p>Rating: <?php echo $rating; ?></p>
         <p class="preco">Preço: <?php echo $price; ?></p>
         <p>Descrição: <?php echo $description; ?></p>
+
+        
     </div>
   </body>
 </html>

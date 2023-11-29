@@ -74,6 +74,8 @@ body {
   padding: 15px;
   margin: 10px;
   text-align: center;
+  position: relative;
+  padding-bottom: 2em;
 }
 
 .product-card img {
@@ -137,6 +139,16 @@ footer {
 
 #product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjust the minimum and maximum width as needed */
-  gap: 20px; /* Adjust the gap between items as needed */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+  gap: 20px; 
+}
+.add-to-cart-form {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%; 
+  text-align: center;
+}
+.add-to-cart-button {
+  
 }

@@ -8,15 +8,21 @@
 
     <div id="product-grid">
         @foreach ($products as $product)
-        <a href="/product/{{$product->id_product}}/{{$product->name}}/{{$product->price}}/{{$product->size}}/{{$product->stock}}/{{$product->brand}}/{{$product->rating}}/{{$product->description}}">
-            <div class="product-card">
-                    <img src="{{ $product->image_url }}" alt="Product Image">
+        <div class="product-card">
+            <a href="/product/{{$product->id_product}}/{{$product->name}}/{{$product->price}}/{{$product->size}}/{{$product->stock}}/{{$product->brand}}/{{$product->rating}}/{{$product->description}}">
+                <img src="{{ $product->image_url }}" alt="Product Image">
                 <h3>{{ $product->name }}</h3>
                 <p>{{ $product->description }}</p>
-                <span>Price: ${{ $product->price }}</span>
-                <button>Add to Cart</button>
-            </div>
             </a>
+            <span>Price: ${{ $product->price }}</span>
+            <!-- 'Add to Cart' form -->
+            <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
+                @csrf
+                <input type="hidden" name="product_id" value="{{ $product->id_product }}">
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit" class="add-to-cart-button">Add to Cart</button>
+            </form>
+        </div>
         @endforeach
     </div>
 
