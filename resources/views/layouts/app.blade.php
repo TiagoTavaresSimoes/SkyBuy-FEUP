@@ -29,6 +29,7 @@
                     <a href="{{ route('home') }}" class="nav-items">Home</a>
                     <a href="/categories" class="nav-items">Categories</a>
                     <a href="/cart" class="nav-items">Cart</a>
+                    <a href="/faq" class="nav-faq">FAQ</a>
 
                     <!-- Botão de Login/Logout -->
                     @if (Auth::check())

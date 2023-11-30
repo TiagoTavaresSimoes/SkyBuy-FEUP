@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\FaqController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,3 +65,4 @@ Route::get('/account', [AccountController::class, 'index'])->middleware('auth')-
 
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 
+Route::get('/faq', [FaqController::class, 'index'])->name('faq');
