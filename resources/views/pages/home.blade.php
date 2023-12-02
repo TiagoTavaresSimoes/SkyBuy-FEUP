@@ -1,11 +1,9 @@
 @extends('layouts.app')
+
 @section('title', 'SkyBuy - Your Online Shop')
+
 @section('content')
-<form method="POST" action="{{ route('home') }}">
-    {{ csrf_field() }}
-    
-
-
+<div class="container">
     <div id="product-grid">
         @foreach ($products as $product)
         <div class="product-card">
@@ -26,9 +24,9 @@
         @endforeach
     </div>
 
+</div>    
     <footer>
-        <!-- Footer Content -->
         <p>© 2023 SkyBuy. All rights reserved.</p>
     </footer>
-</form>
+
 @endsection
