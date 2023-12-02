@@ -9,16 +9,27 @@ class CartController extends Controller
     public function add(Request $request)
     {
         $productId = $request->input('product_id');
-        $quantity = $request->input('quantity');
+        $quantity = (int)$request->input('quantity');
         $product = Product::find($productId);
-
+    
         if (!$product) {
             return redirect()->back()->with('error', 'Invalid product!');
         }
-
+    
+        if ($quantity <= 0 || $quantity > 20) {
+            return redirect()->back()->with('error', 'Invalid quantity selected!');
+        }
+    
+        if ($product->stock < $quantity) {
+            return redirect()->back()->with('error', 'Not enough stock available!');
+        }
+    
         $cart = $request->session()->get('cart', []);
-
+    
         if (isset($cart[$productId])) {
+            if (($cart[$productId]['quantity'] + $quantity) > $product->stock) {
+                return redirect()->back()->with('error', 'Not enough stock available!');
+            }
             $cart[$productId]['quantity'] += $quantity;
         } else {
             $cart[$productId] = [
@@ -29,9 +40,9 @@ class CartController extends Controller
                 "description" => $product->description
             ];
         }
-
+    
         $request->session()->put('cart', $cart);
-
+    
         return redirect()->route('cart.index')->with('success', 'Product added to cart!');
     }
     public function index(Request $request)
