@@ -11,6 +11,10 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController; 
+use App\Http\Controllers\UserProfileController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,7 +32,7 @@ Route::redirect('/', '/home');
 Route::get('/', [HomeController::class, 'show'])->name('home');
 Route::post('/search', [HomeController::class, 'search'])->name('search');
 
-Route::get('/profile', 'UserController@profile')->name('profile');
+Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
 Route::get('/product/{id_product}/{name}/{price}/{size}/{stock}/{brand}/{rating}/{description}', function($id_product, $name, $price, $size, $stock, $brand, $rating, $description){
     return view('product',[
@@ -72,6 +76,16 @@ Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remov
 
 Route::get('/checkout', [CheckoutController::class, 'index'])->middleware('auth')->name('checkout.index');
 
-Route::get('/categories', 'CategoryController@index')->name('categories.index');
+//Route::get('/categories', 'CategoryController@index')->name('categories.index');
 
 Route::post('/order-process', [OrderController::class, 'process'])->name('order.process');
+
+
+
+Route::get('/categories', [ProductController::class, 'index'])->name('categories.index');
+Route::get('/categories/men', [ProductController::class, 'men'])->name('categories.men');
+Route::get('/categories/women', [ProductController::class, 'women'])->name('categories.women');
+
+Route::get('/men', [ProductController::class, 'men']);
+Route::get('/women', [ProductController::class, 'women']);
+
