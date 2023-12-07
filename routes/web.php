@@ -92,3 +92,4 @@ Route::get('/women', [ProductController::class, 'women']);
 Route::get('/admin', [AdminController::class, 'dashboard'])->middleware('is_admin');
 Route::post('admin/user/block', [AdminController::class, 'blockUser'])->name('admin.block_user')->middleware('is_admin');
 Route::post('admin/user/unblock', [AdminController::class, 'unblockUser'])->name('admin.unblock_user')->middleware('is_admin');
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');

@@ -29,10 +29,11 @@
                     <a href="/categories" class="nav-items">Categories</a>
                     <a href="/cart" class="nav-items">Cart</a>
                     <a href="/faq" class="nav-faq">FAQ</a>
-                    @if (Auth::check())
+                    @auth
+                        @if(Auth::user()->isAdmin())
+                            <a href="{{ route('admin.dashboard') }}" class="nav-items">Admin Page</a>
+                        @endif
                         <a href="{{ route('checkout.index') }}" class="nav-items checkout-button">Go to Checkout</a>
-                    @endif
-                    @if (Auth::check())
                         <a href="{{ route('account') }}" class="nav-items">Profile</a>
                         <form action="{{ route('logout') }}" method="POST" class="nav-items" style="display: inline;">
                             @csrf
@@ -41,7 +42,7 @@
                         <span class="nav-items">{{ Auth::user()->name }}</span>
                     @else
                         <a href="{{ route('login') }}" class="login-button">Login</a>
-                    @endif
+                    @endauth
                 </div>
             </header>
             <section id="content">
