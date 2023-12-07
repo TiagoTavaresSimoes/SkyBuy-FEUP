@@ -93,3 +93,7 @@ Route::get('/admin', [AdminController::class, 'dashboard'])->middleware('is_admi
 Route::post('admin/user/block', [AdminController::class, 'blockUser'])->name('admin.block_user')->middleware('is_admin');
 Route::post('admin/user/unblock', [AdminController::class, 'unblockUser'])->name('admin.unblock_user')->middleware('is_admin');
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+Route::get('/account/edit', [AccountController::class, 'edit'])->name('account.edit')->middleware('auth');
+Route::put('/account', [AccountController::class, 'update'])->name('account.update')->middleware('auth');
+
