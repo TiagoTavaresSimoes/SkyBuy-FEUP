@@ -19,7 +19,6 @@ class Order extends Model
         return $this->belongsTo(User::class, 'id_customer', 'id_account');
     }
 
-    // Se você tiver uma relação com produtos em cada pedido, pode adicionar algo assim:
     // public function products()
     // {
     //     return $this->belongsToMany(Product::class, 'order_product', 'id_purchase', 'id_product');

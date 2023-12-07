@@ -22,6 +22,6 @@ class IsAdmin
             return $next($request);
         }
 
-        return redirect('home'); // Ou qualquer rota que você preferir
+        return redirect('home');
     }
 }
