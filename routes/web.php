@@ -14,7 +14,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController; 
 use App\Http\Controllers\UserProfileController;
-
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -89,3 +89,6 @@ Route::get('/categories/women', [ProductController::class, 'women'])->name('cate
 Route::get('/men', [ProductController::class, 'men']);
 Route::get('/women', [ProductController::class, 'women']);
 
+Route::get('/admin', [AdminController::class, 'dashboard'])->middleware('is_admin');
+Route::post('admin/user/block', [AdminController::class, 'blockUser'])->name('admin.block_user')->middleware('is_admin');
+Route::post('admin/user/unblock', [AdminController::class, 'unblockUser'])->name('admin.unblock_user')->middleware('is_admin');

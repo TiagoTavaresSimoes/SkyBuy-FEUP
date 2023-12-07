@@ -19,7 +19,10 @@ class User extends Authenticatable
     protected $primaryKey = 'id_account';
     public $timestamps  = false;
 
-
+    public function isAdmin()
+    {
+        return Admin::where('id_admin', $this->id_account)->exists();
+    }
     protected $fillable = [
         'username', 'email', 'password', 'phone', 'is_banned', 'profile_pic'
     ];
@@ -31,6 +34,10 @@ class User extends Authenticatable
     public function customer()
     {
         return $this->hasOne(Customer::class, 'id_customer', 'id_account');
+    }
+    public function admin()
+    {
+        return $this->hasOne(Admin::class, 'id_admin', 'id_account');
     }
     public function purchases()
     {
