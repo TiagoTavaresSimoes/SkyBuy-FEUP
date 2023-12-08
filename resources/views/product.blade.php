@@ -21,12 +21,11 @@
             <!-- Links da navegação -->
             <a href="{{ route('home') }}" class="nav-items">Home</a>
             <a href="/categories" class="nav-items">Categories</a>
-            <a href="{{ route('account') }}">Your Account</a>
             <a href="/cart" class="nav-items">Cart</a>
 
             <!-- Botão de Login/Logout -->
             @if (Auth::check())
-                <a href="{{ route('profile.index') }}" class="nav-items">Profile</a>
+                <a href="{{ route('account') }}" class="nav-items">Profile</a>
                 <form action="{{ route('logout') }}" method="POST" class="nav-items" style="display: inline;">
                     @csrf
                     <button type="submit" class="login-button">Logout</button>

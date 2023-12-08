@@ -32,7 +32,7 @@ Route::redirect('/', '/home');
 Route::get('/', [HomeController::class, 'show'])->name('home');
 Route::post('/search', [HomeController::class, 'search'])->name('search');
 
-Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+//Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
 Route::get('/product/{id_product}/{name}/{price}/{size}/{stock}/{brand}/{rating}/{description}', function($id_product, $name, $price, $size, $stock, $brand, $rating, $description){
     return view('product',[
@@ -50,7 +50,7 @@ Route::get('/product/{id_product}/{name}/{price}/{size}/{stock}/{brand}/{rating}
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/users/{id}', [UserProfileController::class, 'showProfile'])->name('users.showProfile');
 Route::get('/home', [HomeController::class, 'show'])->name('home');
-Route::get('/profile', [UserProfileController::class, 'index'])->name('profile.index');
+//Route::get('/profile', [UserProfileController::class, 'index'])->name('profile.index');
 Route::get('/home', [HomeController::class, 'show'])->name('home');
 Route::get('/login', 'AuthController@login');
 

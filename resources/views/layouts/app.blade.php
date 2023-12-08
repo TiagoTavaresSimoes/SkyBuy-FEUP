@@ -44,6 +44,13 @@
                         <a href="{{ route('login') }}" class="login-button">Login</a>
                     @endauth
                 </div>
+                <div class="nav-search-container">
+                    <form action="{{ route('search') }}" method="POST">
+                        @csrf
+                        <input type="text" name="search" placeholder="Search for products..." required>
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
             </header>
             <section id="content">
                 @yield('content')
