@@ -3,10 +3,10 @@
 @section('title', 'Dashboard Administrativo')
 
 @section('content')
-    <h1>Dashboard Administrativo</h1>
+    <h1>Dashboard Administrador</h1>
     <div class="container">
         <header id="search-header" class="search-page-card">
-            <h1>Painel Administrativo SkyBuy</h1><br>
+            <h1>Painel Administrativo</h1><br>
             <input type="search" id="search" placeholder="Procurar..."></input>
         </header><br>
 
