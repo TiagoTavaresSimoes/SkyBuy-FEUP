@@ -18,13 +18,19 @@ class HomeController extends Controller
     public function search(Request $request)
     {
         $searchTerm = $request->input('search');
-
-        $products = Product::where('name', 'LIKE', "%{$searchTerm}%")
-        ->orWhere('description', 'LIKE', "%{$searchTerm}%")
-        ->get();
-
-
-
+        $searchWords = explode(' ', $searchTerm);
+    
+        $products = Product::query();
+    
+        foreach ($searchWords as $word) {
+            $products = $products->where(function($query) use ($word) {
+                $query->where('name', 'LIKE', '%' . $word . '%')
+                      ->orWhere('description', 'LIKE', '%' . $word . '%');
+            });
+        }
+    
+        $products = $products->get();
+    
         return view('pages.searchResults', compact('products', 'searchTerm'));
     }
 
