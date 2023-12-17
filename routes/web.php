@@ -97,3 +97,4 @@ Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('adm
 Route::get('/account/edit', [AccountController::class, 'edit'])->name('account.edit')->middleware('auth');
 Route::put('/account', [AccountController::class, 'update'])->name('account.update')->middleware('auth');
 
+Route::get('/account/orders-history', [AccountController::class, 'ordersHistory'])->middleware('auth')->name('account.ordersHistory');

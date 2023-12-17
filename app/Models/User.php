@@ -39,9 +39,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Admin::class, 'id_admin', 'id_account');
     }
-    public function purchases()
+    public function orders()
     {
-        return $this->hasMany(Purchase::class, 'id_customer', 'id_account');
+        return $this->hasMany(Order::class, 'id_customer', 'id_account');
     }
     
     

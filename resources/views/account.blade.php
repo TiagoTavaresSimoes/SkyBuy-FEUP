@@ -12,5 +12,6 @@
         <img src="{{ asset($user->profile_pic) }}" alt="Profile Picture" style="width: 150px; height: 150px;">
         <p><strong>Status:</strong> {{ $user->is_banned ? 'Banned' : 'Active' }}</p>
         <a href="{{ route('account.edit') }}" class="button">Edit Profile</a>
+        <a href="{{ route('account.ordersHistory') }}" class="btn">Ver Histórico de Compras</a>
     </div>
 @endsection

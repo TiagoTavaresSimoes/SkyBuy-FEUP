@@ -30,5 +30,12 @@ class AccountController extends Controller
         $user->update($validatedData);
         return redirect()->route('account')->with('success', 'Profile updated successfully.');
     }
+    public function ordersHistory()
+{
+    $user = auth()->user();
+    $orders = $user->orders;
+
+    return view('account.orders-history', compact('orders'));
+}
 }
 
