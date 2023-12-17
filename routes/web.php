@@ -98,3 +98,7 @@ Route::get('/account/edit', [AccountController::class, 'edit'])->name('account.e
 Route::put('/account', [AccountController::class, 'update'])->name('account.update')->middleware('auth');
 
 Route::get('/account/orders-history', [AccountController::class, 'ordersHistory'])->middleware('auth')->name('account.ordersHistory');
+
+Route::post('/checkout/process-order', [CheckoutController::class, 'processOrder'])->name('checkout.processOrder');
+
+//Route::get('/account/orders-history', [OrdersHistoryController::class, 'index'])->middleware('auth')->name('account.ordersHistory');

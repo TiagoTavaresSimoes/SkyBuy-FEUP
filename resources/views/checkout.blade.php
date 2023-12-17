@@ -50,7 +50,7 @@
 
     <section class="checkout-section">
         <h2>Checkout</h2>
-        <form action="{{ route('order.process') }}" method="POST">
+        <form action="{{ route('checkout.processOrder') }}" method="POST">
             @csrf
             <button type="submit">Place Order</button>
         </form>

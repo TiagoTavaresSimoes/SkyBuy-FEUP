@@ -29,7 +29,9 @@ DROP TABLE IF EXISTS notification CASCADE;
 DROP TABLE IF EXISTS wishlist CASCADE;
 DROP TABLE IF EXISTS faq CASCADE;
 DROP TYPE IF EXISTS OrderStatus;
-
+ALTER TABLE purchase
+ALTER COLUMN id_address DROP NOT NULL,
+ALTER COLUMN id_payment_method DROP NOT NULL;
 -----------------------------------------
 -- Types
 -----------------------------------------
