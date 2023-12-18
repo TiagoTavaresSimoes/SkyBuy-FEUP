@@ -102,3 +102,11 @@ Route::get('/account/orders-history', [AccountController::class, 'ordersHistory'
 Route::post('/checkout/process-order', [CheckoutController::class, 'processOrder'])->name('checkout.processOrder');
 
 //Route::get('/account/orders-history', [OrdersHistoryController::class, 'index'])->middleware('auth')->name('account.ordersHistory');
+
+Route::get('/admin/product/{id}/edit', [AdminController::class, 'editProduct'])->middleware('is_admin')->name('admin.edit_product');
+Route::put('/admin/product/{id}/update', [AdminController::class, 'updateProduct'])->middleware('is_admin')->name('admin.update_product');
+
+Route::get('/admin/products', [AdminController::class, 'showProducts'])->name('admin.showProducts')->middleware('is_admin');
+Route::get('/admin/products/{id}/edit', [AdminController::class, 'editProduct'])->name('admin.editProduct')->middleware('is_admin');
+
+Route::put('/admin/product/{id}', [AdminController::class, 'updateProduct'])->name('admin.updateProduct')->middleware('is_admin');

@@ -51,5 +51,24 @@ class AdminController extends Controller
         }
         return back()->with('error', 'Usuário não encontrado.');
     }
-
+    public function showProducts() {
+        $products = Product::all();
+        return view('admin.products', compact('products'));
+    }
+    
+    public function editProduct($id) {
+        $product = Product::findOrFail($id);
+        return view('admin.edit_product', compact('product'));
+    }
+    public function updateProduct(Request $request, $id) {
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'price' => 'required|numeric',
+        ]);
+    
+        $product = Product::findOrFail($id);
+        $product->update($validatedData);
+        
+        return redirect()->route('admin.showProducts')->with('success', 'Produto atualizado com sucesso');
+    }
 }

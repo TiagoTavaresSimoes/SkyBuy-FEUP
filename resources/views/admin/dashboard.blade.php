@@ -11,7 +11,7 @@
         </header><br>
 
         <nav class="nav nav-pills nav-justified myNav" id="searchpage-nav" role="tablist">
-            <a class="nav-item nav-link active text-white search-nav-bar-button left-nav-button" id="productResults" data-toggle="pill" href="#results-products" role="tab">Produtos</a>
+            <a class="nav-item nav-link active text-white search-nav-bar-button left-nav-button" id="productResults" href="{{ route('admin.showProducts') }}" role="tab">Produtos</a>
             <a class="nav-item nav-link text-white search-nav-bar-button" id="userResults" data-toggle="pill" href="#results-users" role="tab">Usuários</a>
             <a class="nav-item nav-link text-white search-nav-bar-button" id="orderResults" data-toggle="pill" href="#results-orders" role="tab">Pedidos</a>
             <a class="nav-item nav-link text-white search-nav-bar-button right-nav-button" id="reviewResults" data-toggle="pill" href="#results-reviews" role="tab">Avaliações</a>
