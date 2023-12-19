@@ -16,6 +16,7 @@ class Product extends Model{
         'description',
         'price',
         'image_url',
+        'stock',
     ];
 
     public function user() {

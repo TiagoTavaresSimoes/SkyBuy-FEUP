@@ -64,6 +64,7 @@ class AdminController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'price' => 'required|numeric',
+            'stock' => 'required|integer|min:0',
         ]);
     
         $product = Product::findOrFail($id);

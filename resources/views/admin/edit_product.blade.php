@@ -16,6 +16,10 @@
             <label for="price">Preço</label>
             <input type="number" step="0.01" class="form-control" id="price" name="price" value="{{ $product->price }}" required>
         </div>
+        <div class="form-group">
+            <label for="stock">Stock</label>
+            <input type="number" class="form-control" id="stock" name="stock" value="{{ $product->stock }}" required>
+        </div>
         <button type="submit" class="btn btn-primary">Salvar Alterações</button>
     </form>
 </div>
