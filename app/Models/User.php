@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Models;
-
+use App\Models\Customer;
+use App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -33,7 +34,7 @@ class User extends Authenticatable
     ];
     public function customer()
     {
-        return $this->hasOne(Customer::class, 'id_customer', 'id_account');
+        return $this->hasOne(Customer::class, 'id_account', 'id_account');
     }
     public function admin()
     {

@@ -110,3 +110,9 @@ Route::get('/admin/products', [AdminController::class, 'showProducts'])->name('a
 Route::get('/admin/products/{id}/edit', [AdminController::class, 'editProduct'])->name('admin.editProduct')->middleware('is_admin');
 
 Route::put('/admin/product/{id}', [AdminController::class, 'updateProduct'])->name('admin.updateProduct')->middleware('is_admin');
+
+Route::get('/admin/users', [AdminController::class, 'showUsers'])->name('admin.showUsers')->middleware('is_admin');
+
+Route::get('/admin/users/{id}/orders', [AdminController::class, 'userOrders'])->name('admin.userOrders')->middleware('is_admin');
+
+Route::get('/admin/orders', [AdminController::class, 'showOrders'])->name('admin.showOrders')->middleware('is_admin');
