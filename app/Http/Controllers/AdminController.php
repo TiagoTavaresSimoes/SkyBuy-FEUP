@@ -73,22 +73,20 @@ class AdminController extends Controller
         return redirect()->route('admin.showProducts')->with('success', 'Produto atualizado com sucesso');
     }
 
-    public function showUsers() {
-        $users = User::with('customer')->get();
-    
-        return view('admin.users', compact('users'));
-    }
 
     public function userOrders($customerId) {
         $orders = Order::where('id_customer', $customerId)->get();
     
         return view('admin.user_orders', compact('orders'));
     }
-
+    public function showUsers() {
+        $users = User::all();
+        return view('admin.users', compact('users'));
+    }
     public function showOrders()
-{
-    $orders = Order::all(); 
+    {
+        $orders = Order::all(); 
 
-    return view('admin.orders', compact('orders'));
-}
+        return view('admin.orders', compact('orders'));
+    }
 }
