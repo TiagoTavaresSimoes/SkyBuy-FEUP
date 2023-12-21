@@ -29,7 +29,7 @@ use App\Http\Controllers\AdminController;
 // Home
 Route::redirect('/', '/home');
 
-Route::get('/', [HomeController::class, 'show'])->name('home');
+//Route::get('/', [HomeController::class, 'show'])->name('home');
 Route::post('/search', [HomeController::class, 'search'])->name('search');
 
 //Route::get('/profile', [UserController::class, 'profile'])->name('profile');
