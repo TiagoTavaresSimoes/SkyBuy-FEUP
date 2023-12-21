@@ -7,7 +7,6 @@
     <div class="container">
         <header id="search-header" class="search-page-card">
             <h1>Painel Administrativo</h1><br>
-            <input type="search" id="search" placeholder="Procurar..."></input>
         </header><br>
 
         <nav class="nav nav-pills nav-justified myNav" id="searchpage-nav" role="tablist">
