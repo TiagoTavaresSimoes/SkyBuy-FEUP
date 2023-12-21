@@ -49,7 +49,7 @@ Route::get('/product/{id_product}/{name}/{price}/{size}/{stock}/{brand}/{rating}
 
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/users/{id}', [UserProfileController::class, 'showProfile'])->name('users.showProfile');
-Route::get('/home', [HomeController::class, 'show'])->name('home');
+//Route::get('/home', [HomeController::class, 'show'])->name('home');
 //Route::get('/profile', [UserProfileController::class, 'index'])->name('profile.index');
 Route::get('/home', [HomeController::class, 'show'])->name('home');
 Route::get('/login', 'AuthController@login');
