@@ -1,0 +1,616 @@
+openapi: 3.0.0
+
+info:
+  version: '1.0'
+  title: 'SkyBuy'
+  description: 'Web Resources Specification (A9) for SkyBuy'
+
+servers:
+  - url: http://lbaw2375.lbaw.fe.up.pt
+    description: Production server
+
+externalDocs:
+  description: Find more info here.
+  url: https://git.fe.up.pt/lbaw/lbaw2324/lbaw2375/-/wikis/home
+
+tags:
+  - name: 'M01: Authentication and Individual Profile'
+  - name: 'M02: Products'
+  - name: 'M03: Carts and Purchases'
+  - name: 'M04: User Administration and Information Pages'
+
+paths:
+  /login:
+    get:
+      operationId: R101
+      summary: 'R101: Login Form'
+      description: 'Provide login form. Access: PUB'
+      tags:
+        - 'M01: Authentication and Individual Profile'
+      responses:
+        '200':
+          description: 'Ok. Show Log-in UI'
+    post:
+      operationId: R102
+      summary: 'R102: Login Action'
+      description: 'Processes the login form submission. Access: PUB'
+      tags:
+        - 'M01: Authentication and Individual Profile'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+              required:
+                - email
+                - password
+      responses:
+        '302':
+          description: 'Redirect after processing the login credentials.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful authentication. Redirect to homepage.'
+                302Error:
+                  description: 'Failed authentication. Redirect to previous page.'
+
+  /logout:
+    get:
+      operationId: R103
+      summary: 'R103 : Logout Action'
+      description: 'Logout the current authenticated user. Access: USR, ADM'
+      tags:
+        - 'M01: Authentication and Individual Profile'
+      responses:
+        '302':
+          description: 'Redirect after processing logout.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful logout. Redirect to login form.'
+                  value: '/login'
+  /register:
+    get:
+      operationId: R104
+      summary: 'R104 : Register Form'
+      description: 'Register a new user. Access: PUB'
+      tags:
+        - 'M01: Authentication and Individual Profile'
+      responses:
+        '200':
+          description: 'Ok. Show Sign-up UI'
+    post:
+      operationId: R105
+      summary: 'R105 : Register Action'
+      description: 'Processes the new user registration form submission. Access: PUB'
+      tags:
+        - 'M01: Authentication and Individual Profile'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                name:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+                confirm_password:
+                  type: string
+                  format: password
+                picture:
+                  type: string
+                  format: binary
+              required:
+                - username
+                - name
+                - email
+                - password
+                - confirm_password
+      responses:
+        '302':
+          description: 'Redirect after processing the new user information.'
+          headers:
+            Location:
+              schema:
+                type: string
+              example:
+                302Success:
+                  description: 'Successful registration. Redirect to homepage.'
+                  value: '/home'
+                302Failure:
+                  description: 'Failed registration. Redirect to login form.'
+                  value: '/login'
+  /user/{id}:
+    get:
+      operationId: R106
+      summary: 'R106: View user profile'
+      description: 'Show the profile for an individual user, Access: USR, ADM, OWN'
+      tags:
+        - 'M01: Authentication and Individual Profile'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: 'OK. Show user profile UI'
+  /user/edit:
+    get:
+      operationId: R107
+      summary: 'R107: Edit user profile page.'
+      description: 'Shows the edit profile page of the user. Access: OWN'
+      tags:
+        - 'M01: Authentication and Individual Profile'
+      responses:
+        '200':
+          description: 'Ok. You can edit. Show edit profile UI.'
+        '401':
+          description: 'Unauthorized. You cannot edit this profile.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                401Success:
+                  description: 'Unauthorized. Redirect to user profile.'
+                  value: '/user/{id}'
+    post:
+      operationId: R108
+      summary: 'R108: Edit user profile action'
+      description: 'Processes and saves the changes made by user. Access: USR'
+      tags:
+        - 'M01: Authentication and Individual Profile'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                username:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                description:
+                  type: string
+                  format: password
+                password:
+                  type: string
+                  format: password
+                confirm_password:
+                  type: string
+                  format: password
+                image:
+                  type: string
+                  format: binary
+                is_public:
+                  type: boolean
+              required:
+                - name
+                - username
+                - email
+                - description
+                - is_public
+      responses:
+        '302':
+          description: 'Redirect after processing the new user information.'
+          headers:
+            Location:
+              schema:
+                type: string
+              example:
+                302Success:
+                  description: 'Successful update. Redirect to user profile page.'
+                  value: '/user/{id}'
+                302Failure:
+                  description: 'Failed update. Redirect again to edit profile page.'
+                  value: '/user/edit'
+  
+    get:
+      operationId: R201
+      summary: 'R201: List all products.'
+      description: 'Returns a list of all available products. Access: PUB, USR, OWN, ADM'
+      tags:
+        - 'M02: Products'
+      responses:
+        '200':
+          description: 'List of products.'
+          content:
+            application/x-www-form-urlencoded:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    price:
+                      type: number
+                      format: float
+                    image:
+                      type: string
+                      format: binary
+  /products/{productId}:
+    get:
+      operationId: R202
+      summary: 'R202: View product details.'
+      description: 'Returns detailed information of a specific product. Access: ANY'
+      tags:
+        - 'M02: Products'
+      parameters:
+        - name: productId
+          in: path
+          description: ID of the product to fetch.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Product details.'
+          content:
+            application/x-www-form-urlencoded:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  price:
+                    type: number
+                    format: float
+                  image:
+                    type: string
+                    format: binary
+        '404':
+          description: 'Product not found.'
+    put:
+      operationId: R203
+      summary: 'R203: Edit product details.'
+      description: 'Edits the details of a specific product. Access: ADM'
+      tags:
+        - 'M02: Products'
+      parameters:
+        - name: productId
+          in: path
+          description: ID of the product to edit.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                description:
+                  type: string
+                price:
+                  type: number
+                  format: float
+                image:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: 'Product successfully updated.'
+        '400':
+          description: 'Bad request. Invalid input.'
+        '404':
+          description: 'Product not found.'
+
+  /products/search:
+    get:
+      operationId: R204
+      summary: 'R204: Search products.'
+      description: 'Returns products based on a search query. Access: PUB, USR, OWN, ADM'
+      tags:
+        - 'M02: Products'
+      parameters:
+        - name: query
+          in: query
+          description: Search query string.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'List of matched products.'
+          content:
+            application/x-www-form-urlencoded:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    price:
+                      type: number
+                      format: float
+                    image:
+                      type: string
+                      format: binary
+        '400':
+          description: 'Bad request. Invalid query.'
+  components:
+    schemas:
+      Product:
+        type: object
+        properties:
+          id:
+            type: string
+          name:
+            type: string
+          description:
+            type: string
+          price:
+            type: number
+            format: float
+          image:
+            type: string
+            format: binary
+  /cart:
+    post:
+      operationId: R301
+      summary: 'R301: Add a product to cart.'
+      description: 'Adds a product to the cart. Access: USR'
+      tags:
+        - 'M03: Carts and Purchases'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                productId:
+                  type: string
+                quantity:
+                  type: integer
+              required:
+                - productId
+                - quantity
+      responses:
+        '200':
+          description: 'Product added to cart successfully.'
+        '400':
+          description: 'Bad request. Invalid input.'
+        '404':
+          description: 'Product not found.'
+  /cart/{productId}:
+    delete:
+      operationId: R302
+      summary: 'R302: Remove a product from cart.'
+      description: 'Removes a product from the cart. Access: USR'
+      tags:
+        - 'M03: Carts and Purchases'
+      parameters:
+        - name: productId
+          in: path
+          description: ID of the product to remove.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Product removed from cart successfully.'
+        '404':
+          description: 'Product not found in cart.'
+
+    put:
+      operationId: R303
+      summary: 'R303: Edit product quantity in cart.'
+      description: 'Edits the quantity of a specific product in the cart. Access: USR'
+      tags:
+        - 'M03: Carts and Purchases'
+      parameters:
+        - name: productId
+          in: path
+          description: ID of the product to edit.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: integer
+              required:
+                - quantity
+      responses:
+        '200':
+          description: 'Product quantity updated successfully.'
+        '400':
+          description: 'Bad request. Invalid input.'
+        '404':
+          description: 'Product not found in cart.'
+
+  /cart/checkout:
+    post:
+      operationId: R304
+      summary: 'R304: Checkout.'
+      description: 'Processes the cart items for checkout. Access: USR'
+      tags:
+        - 'M03: Carts and Purchases'
+      responses:
+        '200':
+          description: 'Checkout successful.'
+        '400':
+          description: 'Bad request. Cart might be empty or there is an invalid product.'
+
+  
+  /users:
+    get:
+      operationId: R401
+      summary: 'R401: Search for users.'
+      description: 'Search for users based on criteria. Access: ADM'
+      tags:
+        - 'M04: User Administration and Information Pages'
+      parameters:
+        - name: searchQuery
+          in: query
+          description: Query string to search for users.
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'List of users that match the criteria.'
+        '400':
+          description: 'Bad request. Invalid input.'
+
+  /users/{userId}:
+    get:
+      operationId: R402
+      summary: 'R402: View user profile.'
+      description: 'View details of a specific user. Access: ADM, OWN'
+      tags:
+        - 'M04: User Administration and Information Pages'
+      parameters:
+        - name: userId
+          in: path
+          description: ID of the user to view.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'User profile details.'
+        '404':
+          description: 'User not found.'
+    patch:
+      operationId: R403
+      summary: 'R403: Block or Unblock user.'
+      description: 'Allows an admin to block or unblock a user. Access: ADM'
+      tags:
+        - 'M04: User Administration and Information Pages'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum: [ 'block', 'unblock' ]
+              required:
+                - status
+      responses:
+        '200':
+          description: 'User status updated successfully.'
+        '400':
+          description: 'Bad request. Invalid input.'
+        '404':
+          description: 'User not found.'
+
+  /users/{userId}/purchases:
+    get:
+      operationId: R404
+      summary: 'R404: View user purchase history.'
+      description: 'View the purchase history of a specific user. Access: ADM, OWN'
+      tags:
+        - 'M04: User Administration and Information Pages'
+      parameters:
+        - name: userId
+          in: path
+          description: ID of the user whose purchase history to view.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "List of user's purchases."
+        '404':
+          description: 'User not found.'
+
+  /information-pages/{pageName}:
+    get:
+      operationId: R405
+      summary: 'R405: View information page.'
+      description: 'View contents of a specific information page. Access: ANY'
+      tags:
+        - 'M04: User Administration and Information Pages'
+      parameters:
+        - name: pageName
+          in: path
+          description: Name of the information page (e.g., "contacts", "about", "faq").
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Information page content.'
+        '404':
+          description: 'Page not found.'
+    patch:
+      operationId: R406
+      summary: 'R406: Edit information page.'
+      description: 'Edit contents of a specific information page. Access: ADM'
+      tags:
+        - 'M04: User Administration and Information Pages'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+              required:
+                - content
+      responses:
+        '200':
+          description: 'Information page updated successfully.'
+        '400':
+          description: 'Bad request. Invalid input.'
+        '404':
+          description: 'Page not found.'
